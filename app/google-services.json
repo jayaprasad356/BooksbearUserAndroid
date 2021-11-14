@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "125304991476",
+    "project_id": "booksbear-34640",
+    "storage_bucket": "booksbear-34640.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125304991476:android:cc79fbba51032943b638a1",
+        "android_client_info": {
+          "package_name": "com.asquare.booksbear"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125304991476-9c1esobiajqo4o9sabsjo0runkjlasfi.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.asquare.booksbear",
+            "certificate_hash": "c1c200f29014c5bb03b51df11213ec2a22f461d0"
+          }
+        },
+        {
+          "client_id": "125304991476-n04g2kl1s9av7l7mcbge11eujnn02fn7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9lZzA8HiXpmOfEZ7qUUXJ6LvKsrjnyEs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125304991476-n04g2kl1s9av7l7mcbge11eujnn02fn7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

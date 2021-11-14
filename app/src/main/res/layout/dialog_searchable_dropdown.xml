@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_350sdp"
+    android:background="@drawable/bg_curve_reverse"
+    android:backgroundTint="@color/white"
+    android:orientation="vertical"
+    android:padding="@dimen/dimen_20dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_5sdp">
+
+        <ImageView
+            android:id="@+id/imgClose"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_gravity="end"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="OnBtnClick"
+            android:src="@drawable/ic_close" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_toStartOf="@id/imgClose"
+            android:text="@string/default_delivery_location"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
+    </RelativeLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_5sdp"
+        android:text="@string/msg_default_delivery_location"
+        android:textColor="@color/red"
+        android:textSize="@dimen/_10sdp" />
+
+    <EditText
+        android:id="@+id/edtTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_border"
+        android:gravity="start"
+        android:inputType="text"
+        android:hint="@string/select_location"
+        android:padding="@dimen/dimen_15dp"
+        android:singleLine="true"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/dimen_5dp" />
+
+</LinearLayout>
