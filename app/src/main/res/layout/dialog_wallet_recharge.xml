@@ -44,7 +44,7 @@
             android:id="@+id/edtMsg"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/message_optional"
+            android:hint="@string/paymentmode"
             android:importantForAutofill="no"
             android:inputType="text"
             android:textAppearance="@style/TextAppearance.AppCompat.Small" />

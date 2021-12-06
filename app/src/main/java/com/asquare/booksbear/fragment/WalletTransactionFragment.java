@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -25,12 +26,16 @@ import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.asquare.booksbear.activity.LoginActivity;
+import com.asquare.booksbear.activity.MainActivity;
+import com.asquare.booksbear.activity.ReferDetailActivity;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.flutterwave.raveandroid.RaveConstants;
 import com.flutterwave.raveandroid.RavePayActivity;
@@ -90,6 +95,10 @@ public class WalletTransactionFragment extends Fragment implements PaytmPaymentT
     String paymentMethod = null;
     String customerId;
     private ShimmerFrameLayout mShimmerViewContainer;
+    Button btnSendWithdrawalRequest;
+    EditText Referet;
+    Button GetDetails;
+    TextView Nos,Purchase,KnowReferral;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -99,6 +108,36 @@ public class WalletTransactionFragment extends Fragment implements PaytmPaymentT
 
         activity = getActivity();
         session = new Session(activity);
+
+        Referet = root.findViewById(R.id.referet);
+        GetDetails = root.findViewById(R.id.getbtn);
+        Nos = root.findViewById(R.id.nos);
+        Purchase = root.findViewById(R.id.puramt);
+        KnowReferral = root.findViewById(R.id.textknow);
+
+        KnowReferral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (session.getBoolean(Constant.IS_USER_LOGIN)) {
+                    MainActivity.fm.beginTransaction().add(R.id.container, new ReferEarnFragment()).addToBackStack(null).commit();
+                } else {
+                    startActivity(new Intent(activity, LoginActivity.class));
+                }
+
+            }
+        });
+        GetDetails.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (Referet.getText().toString().equals("")){
+                    Referet.setError("Enter Code");
+                    Referet.requestFocus();
+                }
+                else {
+                    GetData();
+                }
+            }
+        });
 
         scrollView = root.findViewById(R.id.scrollView);
         recyclerView = root.findViewById(R.id.recyclerView);
@@ -112,12 +151,57 @@ public class WalletTransactionFragment extends Fragment implements PaytmPaymentT
         btnRechargeWallet = root.findViewById(R.id.btnRechargeWallet);
         mShimmerViewContainer = root.findViewById(R.id.mShimmerViewContainer);
 
+        btnSendWithdrawalRequest = root.findViewById(R.id.btnSendWithdrawalRequest);
+
         tvAlertTitle.setText(getString(R.string.no_wallet_history_found));
         tvAlertSubTitle.setText(getString(R.string.you_have_not_any_wallet_history_yet));
 
         setHasOptionsMenu(true);
 
         getTransactionData(activity, session);
+
+        btnSendWithdrawalRequest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getActivity());
+                LayoutInflater inflater = (LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                final View dialogView = inflater.inflate(R.layout.dialog_confirm_send_request, null);
+                alertDialog.setView(dialogView);
+                alertDialog.setCancelable(true);
+                final AlertDialog dialog = alertDialog.create();
+                Objects.requireNonNull(dialog.getWindow()).setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+                TextView tvDialogSend = dialogView.findViewById(R.id.tvDialogSend);
+                TextView tvDialogCancel = dialogView.findViewById(R.id.tvDialogCancel);
+                final EditText edtAmount = dialogView.findViewById(R.id.edtAmount);
+                final EditText edtMsg = dialogView.findViewById(R.id.edtMsg);
+
+                tvDialogSend.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (!edtAmount.getText().toString().isEmpty() || edtAmount.getText().toString().equals("0")) {
+                            if (Double.parseDouble(edtAmount.getText().toString().trim()) <= Double.parseDouble(session.getData(Constant.BALANCE))) {
+                                SendWithdrawalRequest(edtAmount.getText().toString().trim(), edtMsg.getText().toString().trim());
+                                dialog.dismiss();
+                            } else {
+                                Toast.makeText(getActivity(), R.string.alert_balance_limit, Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            edtAmount.setError(getString(R.string.alert_enter_amount));
+                        }
+                    }
+                });
+
+                tvDialogCancel.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+
+                dialog.show();
+            }
+        });
 
         swipeLayout.setColorSchemeResources(R.color.colorPrimary);
 
@@ -308,6 +392,32 @@ public class WalletTransactionFragment extends Fragment implements PaytmPaymentT
         });
 
         return root;
+    }
+
+    private void SendWithdrawalRequest(String amount, String message)
+    {
+        Map<String, String> params = new HashMap<>();
+        params.put(Constant.SEND_REQUEST, Constant.GetVal);
+        params.put(Constant.AMOUNT, amount);
+        params.put(Constant.TYPE, Constant.USER);
+        params.put(Constant.TYPE_ID, session.getData(Constant.ID));
+        params.put(Constant.MESSAGE, message);
+
+        ApiConfig.RequestToVolley(new VolleyCallback() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onSuccess(boolean result, String response) {
+                if (result) {
+                    try {
+                        JSONObject object = new JSONObject(response);
+                        if (!object.getBoolean(Constant.ERROR)) {
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }, activity, Constant.SEND_WITHDRAWAL_URL, params, true);
     }
 
 
@@ -639,6 +749,43 @@ public class WalletTransactionFragment extends Fragment implements PaytmPaymentT
 
     @Override
     public void onTransactionCancel(String inErrorMessage, Bundle inResponse) {
+
+    }
+    private void GetData()
+    {
+        Map<String, String> params = new HashMap<>();
+        params.put("refercode", Referet.getText().toString().trim());
+        ApiConfig.RequestToVolley((result, response) -> {
+
+            if (result) {
+                try {
+                    JSONObject jsonObject = new JSONObject(response);
+                    if (!jsonObject.getBoolean(Constant.ERROR)) {
+                        JSONObject object = new JSONObject(response);
+                        JSONObject jsonobj = object.getJSONObject(Constant.DATA);
+                        Nos.setText("No. of Sales = "+String.valueOf(jsonobj.getInt("totalsale")));
+                        Purchase.setText("Total Purchase Amount = "+String.valueOf(jsonobj.getInt("totalamount")));
+
+
+                    }
+                    else {
+                        Toast.makeText(getActivity(), ""+String.valueOf(jsonObject.getString("message")), Toast.LENGTH_SHORT).show();
+
+
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
+
+
+            }
+            else {
+                Toast.makeText(getActivity(), String.valueOf(response) +String.valueOf(result), Toast.LENGTH_SHORT).show();
+
+            }
+        }, getActivity(), Constant.REFERDETAILS_URL, params, true);
+
 
     }
 

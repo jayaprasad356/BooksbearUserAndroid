@@ -126,56 +126,7 @@
                     </RelativeLayout>
                 </LinearLayout>
 
-                <LinearLayout
-                    android:id="@+id/lytSeller"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/dimen_5dp"
-                        android:orientation="vertical">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center"
-                                android:padding="@dimen/_10sdp"
-                                android:text="@string/shop_by_seller"
-                                android:textColor="@color/txt_color"
-                                android:textSize="@dimen/_13ssp" />
-
-                            <TextView
-                                android:id="@+id/tvMoreSeller"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignParentEnd="true"
-                                android:layout_centerVertical="true"
-                                android:layout_marginEnd="@dimen/_10sdp"
-                                android:padding="5dp"
-                                android:text="@string/view_all"
-                                android:textColor="@color/colorPrimaryLight"
-                                android:textSize="@dimen/_12ssp"
-                                android:textStyle="bold" />
-
-                        </RelativeLayout>
-
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/sellerRecyclerView"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/dimen_5dp"
-                            android:layout_marginEnd="@dimen/dimen_5dp" />
-                    </LinearLayout>
-
-
-                </LinearLayout>
 
                 <LinearLayout
                     android:id="@+id/lytCategory"
@@ -219,6 +170,56 @@
 
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/categoryrecycleview"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/dimen_5dp"
+                            android:layout_marginEnd="@dimen/dimen_5dp" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/lytSeller"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/dimen_5dp"
+                        android:orientation="vertical">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center"
+                                android:padding="@dimen/_10sdp"
+                                android:text="@string/shop_by_seller"
+                                android:textColor="@color/txt_color"
+                                android:textSize="@dimen/_13ssp" />
+
+                            <TextView
+                                android:id="@+id/tvMoreSeller"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentEnd="true"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/_10sdp"
+                                android:padding="5dp"
+                                android:text="@string/view_all"
+                                android:textColor="@color/colorPrimaryLight"
+                                android:textSize="@dimen/_12ssp"
+                                android:textStyle="bold" />
+
+                        </RelativeLayout>
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/sellerRecyclerView"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="@dimen/dimen_5dp"

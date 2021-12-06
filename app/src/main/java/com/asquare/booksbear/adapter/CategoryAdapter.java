@@ -66,7 +66,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         holder.lytMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("IMAGE",model.getImage());
+
                 Fragment fragment = new SubCategoryFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString(Constant.ID, model.getId());
@@ -74,6 +74,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 bundle.putString(Constant.FROM, "category");
                 fragment.setArguments(bundle);
                 ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
+                Log.d("CATLOG",model.getId() + " - "+model.getName());
             }
         });
     }

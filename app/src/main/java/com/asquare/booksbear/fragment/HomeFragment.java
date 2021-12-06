@@ -373,6 +373,8 @@ public class HomeFragment extends Fragment {
                 section.setStyle(jsonObject.getString(Constant.SECTION_STYLE));
                 section.setSubtitle(jsonObject.getString(Constant.SHORT_DESC));
                 JSONArray productArray = jsonObject.getJSONArray(Constant.PRODUCTS);
+                Log.d("SECTIONHOME",jsonObject.getString(Constant.TITLE) + jsonObject.getString(Constant.ID) + productArray.length());
+
                 section.setProductList(ApiConfig.GetProductList(productArray));
                 sectionList.add(section);
             }
@@ -434,7 +436,7 @@ public class HomeFragment extends Fragment {
                 }
 
                 sellerRecyclerView.setLayoutManager(new GridLayoutManager(getContext(), Constant.GRIDCOLUMN));
-                sellerRecyclerView.setAdapter(new SellerAdapter(getContext(), getActivity(), sellerArrayList, R.layout.lyt_seller, "home", 6));
+                sellerRecyclerView.setAdapter(new SellerAdapter(getContext(), getActivity(), sellerArrayList, R.layout.lyt_seller, "home", 3));
             } else {
                 lytSeller.setVisibility(View.GONE);
             }

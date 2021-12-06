@@ -19,6 +19,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.fragment.app.Fragment;
 
 import com.asquare.booksbear.R;
+import com.asquare.booksbear.activity.MainActivity;
 import com.asquare.booksbear.helper.Constant;
 import com.asquare.booksbear.helper.Session;
 
@@ -28,7 +29,7 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 
 public class ReferEarnFragment extends Fragment {
     View root;
-    TextView txtrefercoin, txtcode, txtcopy, txtinvite;
+    TextView txtrefercoin, txtcode, txtcopy, txtinvite, checkreferral;
     Session session;
     String preText = "";
     Activity activity;
@@ -53,6 +54,13 @@ public class ReferEarnFragment extends Fragment {
         txtcode = root.findViewById(R.id.txtcode);
         txtcopy = root.findViewById(R.id.txtcopy);
         txtinvite = root.findViewById(R.id.txtinvite);
+        checkreferral = root.findViewById(R.id.checkreferal);
+        checkreferral.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MainActivity.fm.beginTransaction().add(R.id.container, new WalletTransactionFragment()).addToBackStack(null).commit();
+            }
+        });
 
         txtinvite.setCompoundDrawablesWithIntrinsicBounds(AppCompatResources.getDrawable(getContext(), R.drawable.ic_share), null, null, null);
         txtcode.setText(session.getData(Constant.REFERRAL_CODE));

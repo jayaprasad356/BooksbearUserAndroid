@@ -45,6 +45,7 @@ import static android.content.Context.INPUT_METHOD_SERVICE;
 import static com.asquare.booksbear.helper.ApiConfig.GetSettings;
 
 public class SubCategoryFragment extends Fragment {
+
     public static ArrayList<Product> productArrayList;
     public static ArrayList<Category> categoryArrayList;
     public static XProductLoadMoreAdapter mAdapter;

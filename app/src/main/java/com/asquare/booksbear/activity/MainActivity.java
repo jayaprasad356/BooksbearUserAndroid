@@ -49,6 +49,7 @@ import com.asquare.booksbear.helper.ApiConfig;
 import com.asquare.booksbear.helper.Constant;
 import com.asquare.booksbear.helper.DatabaseHelper;
 import com.asquare.booksbear.helper.Session;
+import com.asquare.booksbear.helper.VolleyCallback;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -504,7 +505,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     protected void onResume() {
+
         ApiConfig.getWalletBalance(activity, session);
         super.onResume();
     }
+
+
 }

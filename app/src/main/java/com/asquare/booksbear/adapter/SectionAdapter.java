@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -22,6 +23,7 @@ import com.asquare.booksbear.activity.MainActivity;
 import com.asquare.booksbear.fragment.AllProductsFragment;
 import com.asquare.booksbear.fragment.ProductListFragment;
 import com.asquare.booksbear.fragment.SellerProductsFragment;
+import com.asquare.booksbear.fragment.SubCategoryFragment;
 import com.asquare.booksbear.fragment.XProductListFragment;
 import com.asquare.booksbear.helper.Constant;
 import com.asquare.booksbear.model.Category;
@@ -54,7 +56,7 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionH
         switch (section.getStyle()) {
             case "style_1":
                 holder1.recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
-                AdapterStyle1 adapter = new AdapterStyle1(context, activity, section.getProductList(), R.layout.offer_layout);
+                AdapterStyle1 adapter = new AdapterStyle1(context, activity, section.getProductList(),section.getName(),section.getId(), R.layout.offer_layout);
                 holder1.recyclerView.setAdapter(adapter);
                 break;
             case "style_2":
@@ -64,7 +66,7 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionH
                 break;
             case "style_3":
                 holder1.recyclerView.setLayoutManager(new GridLayoutManager(activity, 2));
-                AdapterStyle1 adapter3 = new AdapterStyle1(context, activity, section.getProductList(), R.layout.lyt_style_3);
+                AdapterStyle1 adapter3 = new AdapterStyle1(context, activity, section.getProductList(),section.getName(),section.getId(), R.layout.offer_layout);
                 holder1.recyclerView.setAdapter(adapter3);
                 break;
         }
@@ -79,15 +81,67 @@ public class SectionAdapter extends RecyclerView.Adapter<SectionAdapter.SectionH
                     ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
 
                 }
-                else {
+                else if (section.getName().equals("Super Saver Lots")){
+                    Fragment fragment = new XProductListFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constant.ID, "57");
+                    bundle.putString(Constant.NAME, "Super Saver Pack");
+                    bundle.putString(Constant.FROM, "sub_cate");
+                    fragment.setArguments(bundle);
+                    ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
+
+                }
+                else if (section.getName().equals("Mystery BearBox")){
                     Fragment fragment = new XProductListFragment();
                     Bundle bundle = new Bundle();
                     bundle.putString(Constant.FROM, "section");
                     bundle.putString(Constant.NAME, section.getName());
                     bundle.putString(Constant.ID, section.getId());
+
                     fragment.setArguments(bundle);
 
                     MainActivity.fm.beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
+
+                }
+                else if (section.getName().equals("Explore Educational Books")){
+                    Fragment fragment = new SubCategoryFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constant.ID, "2");
+                    bundle.putString(Constant.NAME, "Books");
+                    bundle.putString(Constant.FROM, "category");
+                    fragment.setArguments(bundle);
+                    ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
+
+                }
+                else if (section.getName().equals("Job & Comepetetive Exams")){
+                    AppCompatActivity activity1 = (AppCompatActivity) context;
+                    Fragment fragment = new XProductListFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constant.ID, "8");
+                    bundle.putString(Constant.NAME, "Job & Govt. exams");
+                    bundle.putString(Constant.FROM, "sub_cate");
+                    fragment.setArguments(bundle);
+                    activity1.getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
+
+                }
+                else {
+                    Fragment fragment = new SubCategoryFragment();
+                    Bundle bundle = new Bundle();
+                    bundle.putString(Constant.ID, section.getProductList().get(0).getCategory_id());
+                    bundle.putString(Constant.NAME, section.getName());
+                    bundle.putString(Constant.FROM, "category");
+                    fragment.setArguments(bundle);
+                    ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
+//                    Fragment fragment = new XProductListFragment();
+//                    Bundle bundle = new Bundle();
+//                    bundle.putString(Constant.FROM, "section");
+//                    bundle.putString(Constant.NAME, section.getName());
+//                    bundle.putString(Constant.ID, section.getId());
+//
+//                    fragment.setArguments(bundle);
+//
+//                    MainActivity.fm.beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
+
                 }
 
 

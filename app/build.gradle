@@ -7,8 +7,8 @@ android {
         applicationId "com.asquare.booksbear"
         minSdkVersion 23
         targetSdkVersion 30
-        versionCode 8
-        versionName '8.0'
+        versionCode 10
+        versionName '10.0'
         vectorDrawables.useSupportLibrary = true
         multiDexEnabled true
         useLibrary 'org.apache.http.legacy'

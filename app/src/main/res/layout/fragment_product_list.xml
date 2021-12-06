@@ -10,23 +10,18 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true">
 
         <androidx.core.widget.NestedScrollView
             android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <LinearLayout
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyclerView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-            </LinearLayout>
+                android:layout_height="match_parent" />
         </androidx.core.widget.NestedScrollView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -36,17 +31,53 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:orientation="vertical"
-        shimmer:shimmer_duration="1200"
-        android:visibility="gone">
+        android:visibility="gone"
+        shimmer:shimmer_duration="1200">
 
         <!-- Adding rows of placeholders -->
         <LinearLayout
-            android:id="@+id/lytList"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <include layout="@layout/simmer_product_list" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cartView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                shimmer:cardBackgroundColor="@color/transparent">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/_5sdp">
+
+
+                    <RelativeLayout
+                        android:id="@+id/lytImg1"
+                        android:layout_width="@dimen/_110sdp"
+                        android:layout_height="@dimen/_110sdp"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:background="@drawable/circle_bg"
+                        android:backgroundTint="@color/background"
+                        android:padding="@dimen/_2sdp">
+
+                    </RelativeLayout>
+
+                    <View
+                        android:id="@+id/tvTitle1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_below="@id/lytImg1"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:background="@color/background"
+                        android:padding="@dimen/_5sdp" />
+                </RelativeLayout>
+
+            </androidx.cardview.widget.CardView>
 
             <include layout="@layout/simmer_product_list" />
 
@@ -58,26 +89,7 @@
 
             <include layout="@layout/simmer_product_list" />
 
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/lytGrid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <include layout="@layout/simmer_product_grid" />
-
-            <include layout="@layout/simmer_product_grid" />
-
-            <include layout="@layout/simmer_product_grid" />
-
-            <include layout="@layout/simmer_product_grid" />
-
-            <include layout="@layout/simmer_product_grid" />
-
-            <include layout="@layout/simmer_product_grid" />
-
-            <include layout="@layout/simmer_product_grid" />
+            <include layout="@layout/simmer_product_list" />
 
         </LinearLayout>
 

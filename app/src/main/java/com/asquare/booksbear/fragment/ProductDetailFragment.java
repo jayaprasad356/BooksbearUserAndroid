@@ -510,7 +510,7 @@ public class ProductDetailFragment extends Fragment {
                                 e.printStackTrace();
                             }
 
-                            AdapterStyle1 adapter = new AdapterStyle1(getContext(), activity, productArrayList, R.layout.offer_layout);
+                            AdapterStyle1 adapter = new AdapterStyle1(getContext(), activity, productArrayList,"","", R.layout.offer_layout);
                             recyclerView.setAdapter(adapter);
                             relativeLayout.setVisibility(View.VISIBLE);
                         } else {

@@ -5,8 +5,9 @@ import java.util.HashMap;
 public class Constant {
     //MODIFICATION PART
 
-    public static final String MAINBASEUrl = "http://192.168.43.122/booksbear/"; //Admin panel url
-    //public static final String MAINBASEUrl = "https://admin.booksbear.in/"; //Admin panel url
+    //public static final String MAINBASEUrl = "http://bbdebug.booksbear.in/"; //Admin panel url
+    //public static final String MAINBASEUrl = "http://192.168.43.122/booksbearadmin/"; //Admin panel url
+    public static final String MAINBASEUrl = "https://admin.booksbear.in/"; //Admin panel url
 
     //set your jwt secret key here...key must same in PHP and Android
     public static final String JWT_KEY = "12345678";
@@ -82,6 +83,7 @@ public class Constant {
     public static final String CART_URL = BaseUrl + "cart.php";
     public static final String STRIPE_BASE_URL = MAINBASEUrl + "stripe/create-payment.php";
     public static final String TRANSACTION_URL = BaseUrl + "get-user-transactions.php";
+    public static final String SEND_WITHDRAWAL_URL = BaseUrl + "send-withdrawal-request.php";
     public static final String PROMO_CODE_CHECK_URL = BaseUrl + "validate-promo-code.php";
     public static final String VERIFY_PAYMENT_REQUEST = BaseUrl + "payment-request.php";
     public static final String REGISTER_DEVICE_URL = BaseUrl + "store-fcm-id.php";
@@ -184,10 +186,13 @@ public class Constant {
     public static final String REMOVE_FROM_CART = "remove_from_cart";
     public static final String SORT = "sort";
     public static final String TYPE = "type";
+    public static final String SEND_REQUEST = "send_request";
+
     public static final String IMAGE = "image";
     public static final String NAME = "name";
     public static final String TYPE_ID = "type_id";
     public static final String ID = "id";
+    public static final String USER = "user";
     public static final String SUBTITLE = "subtitle";
     public static final String PRODUCTS = "products";
     public static final String SUC_CATE_ID = "subcategory_id";

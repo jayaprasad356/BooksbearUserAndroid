@@ -614,7 +614,9 @@ public class PaymentFragment extends Fragment implements PaytmPaymentTransaction
             sendparams.put(Constant.ORDER_NOTE, tvSpecialNote.getText().toString().trim());
             if (paymentMethod.equals(getResources().getString(R.string.codpaytype)) || paymentMethod.equals(getString(R.string.wallettype))) {
                 ApiConfig.RequestToVolley((result, response) -> {
+                    Log.d("ORDERTEXT",String.valueOf(result + response));
                     if (result) {
+
                         try {
                             JSONObject object = new JSONObject(response);
 
@@ -638,6 +640,7 @@ public class PaymentFragment extends Fragment implements PaytmPaymentTransaction
 
                         }
                     }
+
                 }, activity, Constant.ORDERPROCESS_URL, sendparams, true);
                 dialog.dismiss();
             } else {

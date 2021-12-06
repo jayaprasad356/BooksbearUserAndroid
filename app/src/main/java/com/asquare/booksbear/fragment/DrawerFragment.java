@@ -25,6 +25,7 @@ import com.asquare.booksbear.R;
 import com.asquare.booksbear.activity.LoadUrlActivity;
 import com.asquare.booksbear.activity.LoginActivity;
 import com.asquare.booksbear.activity.MainActivity;
+import com.asquare.booksbear.activity.ReferDetailActivity;
 import com.asquare.booksbear.helper.ApiConfig;
 import com.asquare.booksbear.helper.Constant;
 import com.asquare.booksbear.helper.Session;
@@ -87,6 +88,7 @@ public class DrawerFragment extends Fragment {
         tvMenuChangePassword = root.findViewById(R.id.tvMenuChangePassword);
         tvMenuManageAddresses = root.findViewById(R.id.tvMenuManageAddresses);
         tvMenuReferEarn = root.findViewById(R.id.tvMenuReferEarn);
+
         tvMenuContactUs = root.findViewById(R.id.tvMenuContactUs);
         tvMenuAboutUs = root.findViewById(R.id.tvMenuAboutUs);
         tvMenuRateUs = root.findViewById(R.id.tvMenuRateUs);
@@ -181,6 +183,7 @@ public class DrawerFragment extends Fragment {
             startActivity(intent);
 
         });
+
         tvManhonur.setOnClickListener(v ->{
             Intent intent = new Intent(requireActivity(), LoadUrlActivity.class);
             intent.putExtra("url",Constant.MANOFHONOUR);

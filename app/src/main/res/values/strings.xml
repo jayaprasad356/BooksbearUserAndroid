@@ -231,6 +231,7 @@
     <string name="pass_not_match">Password not matched</string>
     <string name="sharapp">Share App</string>
     <string name="refere">Refer &amp; Earn</string>
+    <string name="referdetails">Refer Details</string>
     <string name="wallet_balance">Wallet Balance  </string>
     <string name="wallet_balance1">Wallet Balance :</string>
     <string name="remaining_wallet_balance">Remaining Wallet Balance:&#160;</string>
@@ -271,6 +272,7 @@
     <string name="invite_frnd_title">Invite Friend Using</string>
     <string name="refer_code_copied">Refer Code Copied to Clipboard</string>
     <string name="your_refer_code">Your Referral Code</string>
+    <string name="checkearnings">Check Earnings and Reports</string>
     <string name="tap_copy">Tap To Copy</string>
     <string name="refer_now">REFER NOW</string>
     <string name="refer_share_msg_1">I have earned money using&#160;</string>
@@ -278,7 +280,7 @@
     <string name="refer_code_alert_msg">Your refer code not generated please re-login for your refer code.</string><!--Firebase AUTH -->
     <string name="otp_resend_alert">An OTP (One-Time-Password) has been sent to your registered mobile number.</string>
     <string name="enter_otp">Enter OTP</string>
-    <string name="wallet_history">Wallet History</string>
+    <string name="wallet_history">Manage wallet &amp; Referals</string>
     <string name="transaction_history">Transaction History</string>
     <string name="transaction">ID\u0020</string>
     <string name="amount_title">Amount\u0020:\u0020</string>
@@ -329,8 +331,12 @@
     <string name="flutterwave">Flutterwave</string>
     <string name="your_balance">Your Balance</string>
     <string name="recharge_your_wallet">Recharge Your Wallet</string>
+    <string name="wallet_withdrawal_request_alert">*Please note: When you send a request, Amount will deduct from wallet and If admin rejects the request, then the amount will refund in the wallet.</string>
+    <string name="withdrawal_amount">Withdrawal Amount</string>
+    <string name="alert_balance_limit">You can not withdraw amount more then available wallet balance!!!</string>
     <string name="amount">Amount</string>
     <string name="recharge">Recharge</string>
+    <string name="paymentmode">Payment Mode(UPI or bank details)</string>
     <string name="wallet_recharge">Wallet Recharge</string>
     <string name="alert_recharge">Amount should me greater than 0(Zero).</string>
     <string name="message_optional">Message (Optional)</string>
@@ -420,4 +426,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="change_password">Change Password</string>
     <string name="user_block_msg">It seems your account is not active please contact admin for more info!</string>
+    <string name="send_withdrawal_request">Send Withdrawal Request</string>
+    <string name="send">Send</string>
 </resources>

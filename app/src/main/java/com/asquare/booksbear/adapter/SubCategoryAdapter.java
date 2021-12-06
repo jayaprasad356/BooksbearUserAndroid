@@ -3,6 +3,7 @@ package com.asquare.booksbear.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.asquare.booksbear.fragment.XProductListFragment;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -64,13 +66,14 @@ public class SubCategoryAdapter extends RecyclerView.Adapter<SubCategoryAdapter.
             @Override
             public void onClick(View v) {
                 AppCompatActivity activity1 = (AppCompatActivity) context;
-                Fragment fragment = new ProductListFragment();
+                Fragment fragment = new XProductListFragment();
                 Bundle bundle = new Bundle();
                 bundle.putString(Constant.ID, model.getId());
                 bundle.putString(Constant.NAME, model.getName());
                 bundle.putString(Constant.FROM, from);
                 fragment.setArguments(bundle);
                 activity1.getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
+                Log.d("SUBCATLOG",model.getId() + " - "+model.getName() + " - " + from);
             }
         });
     }
