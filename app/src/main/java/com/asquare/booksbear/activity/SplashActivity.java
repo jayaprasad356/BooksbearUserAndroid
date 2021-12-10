@@ -104,8 +104,10 @@ public class SplashActivity extends Activity {
                 long lVersion = Long.parseLong(sLatestVersion);*/
                 if (sLatestVersion != null && !sLatestVersion.equals(sCurrentVersion)){
                     updateAlertDialog();
+
                 }
                 else {
+
                     if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
                         GotoActivity();
                     }
@@ -131,8 +133,13 @@ public class SplashActivity extends Activity {
     private void updateAlertDialog()
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle(getResources().getString(R.string.app_name));
-        builder.setMessage("Update Available");
+        builder.setTitle("Yep! Here you can see a new update \uD83D\uDC3B\n");
+        builder.setMessage(
+                "We are working hard for your better experience \uD83E\uDD29\n" +
+                "\n" +
+                "So, Update it and enter in a new and updated version \uD83D\uDE0E\n" +
+                "\n" +
+                "If the playstore is still not showing the update option\uD83D\uDE15then it's Playstore fault not ours \uD83C\uDF84, Yep Google sucks sometimes isn't it !No worries give them a try and Re-try again \uD83D\uDE10");
         builder.setCancelable(false);
 
         builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {

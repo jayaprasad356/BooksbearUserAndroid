@@ -82,13 +82,47 @@ public class AdapterStyle1 extends RecyclerView.Adapter<AdapterStyle1.VideoHolde
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Fragment fragment = new SubCategoryFragment();
-                    Bundle bundle = new Bundle();
-                    bundle.putString(Constant.ID, productList.get(0).getCategory_id());
-                    bundle.putString(Constant.NAME, secname);
-                    bundle.putString(Constant.FROM, "category");
-                    fragment.setArguments(bundle);
-                    ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
+                    if (secname.equals("Super Saver Lots")){
+                        Fragment fragment = new XProductListFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString(Constant.ID, "57");
+                        bundle.putString(Constant.NAME, "Super Saver Pack");
+                        bundle.putString(Constant.FROM, "sub_cate");
+                        fragment.setArguments(bundle);
+                        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
+
+
+                    }else if (secname.equals("Explore Educational Books")){
+                        Fragment fragment = new SubCategoryFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString(Constant.ID, "2");
+                        bundle.putString(Constant.NAME, "Books");
+                        bundle.putString(Constant.FROM, "category");
+                        fragment.setArguments(bundle);
+                        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
+
+
+                    }
+                    else if (secname.equals("Job & Comepetetive Exams")){
+                        AppCompatActivity activity1 = (AppCompatActivity) context;
+                        Fragment fragment = new XProductListFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString(Constant.ID, "8");
+                        bundle.putString(Constant.NAME, "Job & Govt. exams");
+                        bundle.putString(Constant.FROM, "sub_cate");
+                        fragment.setArguments(bundle);
+                        activity1.getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
+
+                    }
+                    else {
+                        Fragment fragment = new SubCategoryFragment();
+                        Bundle bundle = new Bundle();
+                        bundle.putString(Constant.ID, productList.get(0).getCategory_id());
+                        bundle.putString(Constant.NAME, secname);
+                        bundle.putString(Constant.FROM, "category");
+                        fragment.setArguments(bundle);
+                        ((AppCompatActivity) context).getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
+                    }
 //                    Fragment fragment = new XProductListFragment();
 //                    Bundle bundle = new Bundle();
 //                    bundle.putString(Constant.FROM, "section");

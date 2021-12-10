@@ -559,7 +559,7 @@ public class PaymentFragment extends Fragment implements PaytmPaymentTransaction
         }
         sendparams.put(Constant.DELIVERY_TIME, (deliveryDay + " - " + deliveryTime));
         sendparams.put(Constant.ADDRESS_ID, Constant.selectedAddressId);
-        Log.d("PAYMENT","USER ID"+session.getData(Constant.ID)+"\n"+"PRODUCT ID"+String.valueOf(variantIdList));
+        Log.d("VARIANT ID","USER ID"+session.getData(Constant.ID)+"\n"+"PRODUCT ID"+String.valueOf(variantIdList));
 
         final AlertDialog.Builder alertDialog = new AlertDialog.Builder(getContext());
         LayoutInflater inflater = (LayoutInflater) activity.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -585,7 +585,6 @@ public class PaymentFragment extends Fragment implements PaytmPaymentTransaction
         tvDialogCancel = dialogView.findViewById(R.id.tvDialogCancel);
         tvDialogConfirm = dialogView.findViewById(R.id.tvDialogConfirm);
         tvSpecialNote = dialogView.findViewById(R.id.tvSpecialNote);
-        Toast.makeText(activity, Constant.FRND_CODE, Toast.LENGTH_SHORT).show();
 
         if (codextracharges){
             tvDialogDeliveryCharge_txt.setText(getString(R.string.cod_charge1) +" + "+getString(R.string.delivery_charge1) );
