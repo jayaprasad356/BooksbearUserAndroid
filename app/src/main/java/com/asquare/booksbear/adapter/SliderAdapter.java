@@ -1,6 +1,8 @@
 package com.asquare.booksbear.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.view.LayoutInflater;
@@ -94,6 +96,18 @@ public class SliderAdapter extends PagerAdapter {
                         fragment.setArguments(bundle);
 
                         MainActivity.fm.beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();
+
+                    }
+                    else {
+                        try {
+                            String url = singleItem.getSlide_url();
+                            Intent i = new Intent(Intent.ACTION_VIEW);
+                            i.setData(Uri.parse(url));
+                            activity.startActivity(i);
+
+                        }catch (Exception e){
+
+                        }
 
                     }
 

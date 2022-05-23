@@ -294,7 +294,7 @@ public class HomeFragment extends Fragment {
                             SectionProductRequest(jsonObject.getJSONArray(Constant.SECTIONS));
                             GetSlider(jsonObject.getJSONArray(Constant.SLIDER_IMAGES));
                             GetSeller(jsonObject.getJSONArray(Constant.SELLER));
-                            Log.d("SECTION",String.valueOf(jsonObject.getJSONArray(Constant.SECTIONS)));
+
                         } else {
                             nestedScrollView.setVisibility(View.VISIBLE);
                             mShimmerViewContainer.setVisibility(View.GONE);
@@ -393,7 +393,7 @@ public class HomeFragment extends Fragment {
             size = jsonArray.length();
             for (int i = 0; i < jsonArray.length(); i++) {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                sliderArrayList.add(new Slider(jsonObject.getString(Constant.TYPE), jsonObject.getString(Constant.TYPE_ID), jsonObject.getString(Constant.NAME), jsonObject.getString(Constant.IMAGE)));
+                sliderArrayList.add(new Slider(jsonObject.getString(Constant.TYPE), jsonObject.getString(Constant.TYPE_ID), jsonObject.getString(Constant.NAME), jsonObject.getString(Constant.IMAGE), jsonObject.getString(Constant.SLIDER_URL)));
             }
             mPager.setAdapter(new SliderAdapter(sliderArrayList, getActivity(), R.layout.lyt_slider, "home"));
             ApiConfig.addMarkers(0, sliderArrayList, mMarkersLayout, getContext());

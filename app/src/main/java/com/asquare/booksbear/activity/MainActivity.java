@@ -17,6 +17,7 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -101,6 +102,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
         activity = MainActivity.this;
         session = new Session(activity);
+
+
 
         bottomNavigationView = findViewById(R.id.bottomNavigationView);
         from = getIntent().getStringExtra(Constant.FROM);
@@ -187,6 +190,13 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                             }
                             active = categoryFragment;
                         }
+                        break;
+                    case R.id.navGames:
+                        invalidateOptionsMenu();
+                        Intent intent = new Intent(activity, LoadUrlActivity.class);
+                        intent.putExtra("url",Constant.GAMESURL);
+                        intent.putExtra("title",getString(R.string.quizgames));
+                        startActivity(intent);
                         break;
                     case R.id.navWishList:
                         Constant.TOOLBAR_TITLE = getString(R.string.title_fav);

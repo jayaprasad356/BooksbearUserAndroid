@@ -11,6 +11,10 @@
         android:id="@+id/navCategory"
         android:icon="@drawable/category"
         android:title="@string/title_category" />
+    <item
+        android:id="@+id/navGames"
+        android:icon="@drawable/games"
+        android:title="@string/quizgames" />
 
     <item
         android:id="@+id/navWishList"

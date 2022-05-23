@@ -235,6 +235,7 @@ public class Constant {
     public static final String CATEGORY_ID = "category_id";
     public static final String CATEGORIES = "categories";
     public static final String SLIDER_IMAGES = "slider_images";
+    public static final String SLIDER_URL= "slide_url";
     public static final String SELLER = "seller";
     public static final String SECTIONS = "sections";
     public static final String OFFER_IMAGES = "offer_images";
@@ -399,6 +400,7 @@ public class Constant {
 
 
     public static String CHATWEBURL = "https://tawk.to/chat/60b8f4cc6699c7280daa8b47/1f797ogd7";
+    public static String GAMESURL = "https://Booksbear.in/games";
 
     public static String randomAlphaNumeric(int count) {
         StringBuilder builder = new StringBuilder();
