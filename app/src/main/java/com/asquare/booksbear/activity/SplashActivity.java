@@ -23,6 +23,10 @@ import com.asquare.booksbear.MainAlertActivity;
 import com.asquare.booksbear.R;
 import com.asquare.booksbear.helper.Constant;
 import com.asquare.booksbear.helper.Session;
+import com.github.javiersantos.appupdater.AppUpdaterUtils;
+import com.github.javiersantos.appupdater.enums.AppUpdaterError;
+import com.github.javiersantos.appupdater.enums.UpdateFrom;
+import com.github.javiersantos.appupdater.objects.Update;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.play.core.appupdate.AppUpdateInfo;
@@ -52,8 +56,6 @@ public class SplashActivity extends Activity {
         activity = SplashActivity.this;
         session = new Session(activity);
         session.setBoolean("update_skip", false);
-
-        new GetLatestVersion().execute();
         FirebaseDynamicLinks.getInstance()
                 .getDynamicLink(getIntent())
                 .addOnSuccessListener(this, new OnSuccessListener<PendingDynamicLinkData>() {
@@ -80,61 +82,26 @@ public class SplashActivity extends Activity {
 
                     }
                 });
-    }
-    private class GetLatestVersion extends AsyncTask<String,Void,String>
-    {
-        @Override
-        protected String doInBackground(String... strings) {
-            try {
 
-                sLatestVersion = Jsoup.connect("https://play.google.com/store/apps/details?id=" + getPackageName()+ "&hl=en")
-                        .timeout(30000)
-                        .userAgent("Mozilla/5.0 (Windows; U; WindowsNT 5.1; en-US; rv1.8.1.6) Gecko/20070725 Firefox/2.0.0.6")
-                        .referrer("http://www.google.com")
-                        .get()
-                        .select("div.hAyfc:nth-child(4) > span:nth-child(2) > div:nth-child(1) > span:nth-child(1)")
-                        .first()
-                        .ownText();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            return sLatestVersion;
-        }
+        AppUpdateManager appUpdateManager = AppUpdateManagerFactory.create(this);
 
-        @Override
-        protected void onPostExecute(String s) {
-            if(CheckNetwork.isInternetAvailable(SplashActivity.this)){
-                sCurrentVersion = BuildConfig.VERSION_NAME;
-                /*Log.e("VERSION",sCurrentVersion + " "+sLatestVersion);
-                long cVersion = Long.parseLong(sCurrentVersion);
-                long lVersion = Long.parseLong(sLatestVersion);*/
-                if (sLatestVersion != null && !sLatestVersion.equals(sCurrentVersion)){
-                    updateAlertDialog();
+// Returns an intent object that you use to check for an update.
+        Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
 
-                }
-                else {
-
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O){
-                        GotoActivity();
-                    }
-                    else {
-                        Intent intent = new Intent(SplashActivity.this, MainAlertActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                    //new Handler().postDelayed(() -> startActivity(new Intent(SplashActivity.this, WelcomeActivity.class).putExtra(Constant.FROM, "").addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)), SPLASH_TIME_OUT);
-
-                }
-
+// Checks that the platform will allow the specified type of update.
+        appUpdateInfoTask.addOnSuccessListener(appUpdateInfo -> {
+            if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                    && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                updateAlertDialog();
             }
             else {
-                Toast.makeText(SplashActivity.this, "Please Connect Internet", Toast.LENGTH_SHORT).show();
-
+                GotoActivity();
 
             }
+        });
 
-        }
     }
+
 
     private void updateAlertDialog()
     {
