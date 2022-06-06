@@ -233,24 +233,6 @@ public class DrawerActivity extends AppCompatActivity {
                     intent.putExtra("title",getString(R.string.contact));
                     startActivity(intent);
                     break;
-                case R.id.menu_giveaway:
-                    intent = new Intent(getApplicationContext(),LoadUrlActivity.class);
-                    intent.putExtra("url",Constant.GIVEAWAY);
-                    intent.putExtra("title",getString(R.string.winrewards));
-                    startActivity(intent);
-                    break;
-                case R.id.menu_moh:
-                    intent = new Intent(getApplicationContext(),LoadUrlActivity.class);
-                    intent.putExtra("url",Constant.MANOFHONOUR);
-                    intent.putExtra("title",getString(R.string.manofhonour));
-                    startActivity(intent);
-                    break;
-                case R.id.menu_mon:
-                    intent = new Intent(getApplicationContext(),LoadUrlActivity.class);
-                    intent.putExtra("url",Constant.MANOFNATURE);
-                    intent.putExtra("title",getString(R.string.manofnature));
-                    startActivity(intent);
-                    break;
                 case R.id.menu_chat:
                     /*fragment = new WebViewFragment();
                     bundle = new Bundle();

@@ -57,6 +57,9 @@ public class Constant {
     public static final String MANOFHONOUR = "https://booksbear.in/man-of-honour";
     public static final String MANOFNATURE = "https://booksbear.in/man-of-nature";
     public static final String DETAILEDTRACK = "https://booksbear.shiprocket.co";
+    public static final String COURSE = "https://BooksBear.in/betterenroll";
+    public static final String INTERNSHIP = "https://BooksBear.in/Interns";
+    public static final String OFFERS = "https://BooksBear.in/offers";
 
 
     //**********APIS**********

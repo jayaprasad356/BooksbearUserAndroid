@@ -56,7 +56,7 @@ public class DrawerFragment extends Fragment {
     Fragment fragment;
     Bundle bundle;
     public TextView tvSell,tvRent,tvEbooks,tvDonate,tvRequest;
-    public TextView tvGiveaway,tvManhonur,tvMannature,tvChat;
+    public TextView tvOffer,tvInternship,tvCourse,tvChat;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -67,10 +67,10 @@ public class DrawerFragment extends Fragment {
 
         imgProfile = root.findViewById(R.id.imgProfile);
         imgEditProfile = root.findViewById(R.id.imgEditProfile);
-        tvGiveaway = root.findViewById(R.id.menu_giveaway);
-        tvManhonur = root.findViewById(R.id.menu_moh);
-        tvMannature = root.findViewById(R.id.menu_mon);
         tvChat = root.findViewById(R.id.menu_chat);
+        tvOffer = root.findViewById(R.id.menu_offer);
+        tvInternship = root.findViewById(R.id.menu_internship);
+        tvCourse = root.findViewById(R.id.menu_course);
         tvSell = root.findViewById(R.id.menu_sell);
         tvRent = root.findViewById(R.id.menu_rent);
         tvEbooks = root.findViewById(R.id.menu_ebooks);
@@ -176,25 +176,25 @@ public class DrawerFragment extends Fragment {
         tvMenuNotification.setOnClickListener(v -> {
             MainActivity.fm.beginTransaction().add(R.id.container, new NotificationFragment()).addToBackStack(null).commit();
         });
-        tvGiveaway.setOnClickListener(v ->{
+        tvOffer.setOnClickListener(v ->{
             Intent intent = new Intent(requireActivity(), LoadUrlActivity.class);
-            intent.putExtra("url",Constant.GIVEAWAY);
-            intent.putExtra("title",getString(R.string.winrewards));
+            intent.putExtra("url",Constant.OFFERS);
+            intent.putExtra("title","OFFERS");
             startActivity(intent);
 
         });
 
-        tvManhonur.setOnClickListener(v ->{
+        tvCourse.setOnClickListener(v ->{
             Intent intent = new Intent(requireActivity(), LoadUrlActivity.class);
-            intent.putExtra("url",Constant.MANOFHONOUR);
-            intent.putExtra("title",getString(R.string.manofhonour));
+            intent.putExtra("url",Constant.COURSE);
+            intent.putExtra("title","COURSES");
             startActivity(intent);
 
         });
-        tvMannature.setOnClickListener(v ->{
+        tvInternship.setOnClickListener(v ->{
             Intent intent = new Intent(requireActivity(), LoadUrlActivity.class);
-            intent.putExtra("url",Constant.MANOFNATURE);
-            intent.putExtra("title",getString(R.string.manofnature));
+            intent.putExtra("url",Constant.INTERNSHIP);
+            intent.putExtra("title","INTERNSHIP");
             startActivity(intent);
 
         });

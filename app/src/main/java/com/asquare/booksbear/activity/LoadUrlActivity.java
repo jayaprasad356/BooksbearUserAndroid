@@ -13,6 +13,9 @@ import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -58,9 +61,14 @@ public class LoadUrlActivity extends AppCompatActivity implements AdvancedWebVie
         });
         mWebView.setListener(this, this);
         mWebView.setMixedContentAllowed(false);
-        mWebView.addPermittedHostname("booksbear.in");
-        mWebView.addPermittedHostname("booksbear.shiprocket.co");
         mWebView.loadUrl(Url);
+        mWebView.setWebViewClient(new WebViewClient() {
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+                view.loadUrl(request.getUrl().toString());
+                return false;
+            }
+        });
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -107,8 +115,7 @@ public class LoadUrlActivity extends AppCompatActivity implements AdvancedWebVie
 
     @Override
     public void onExternalPageRequest(String url) {
-        startActivity(new Intent(Intent.ACTION_VIEW,
-                Uri.parse(url)));
+
 
     }
 

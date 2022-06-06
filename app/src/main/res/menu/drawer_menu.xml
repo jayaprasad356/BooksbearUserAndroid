@@ -22,6 +22,11 @@
         android:checkableBehavior="none">
 
         <item
+            android:id="@+id/menu_course"
+            android:icon="@drawable/course"
+            android:title="Courses" />
+
+        <item
             android:id="@+id/menu_sell"
             android:icon="@drawable/sell"
             android:title="@string/sell_books" />
@@ -84,26 +89,43 @@
             android:icon="@drawable/refer_earn"
             android:title="@string/refere" />
     </group>
+<!--    <group-->
+<!--        android:id="@+id/group4"-->
+<!--        android:checkableBehavior="none">-->
+
+<!--        <item-->
+<!--            android:id="@+id/menu_giveaway"-->
+<!--            android:icon="@drawable/giveaway"-->
+<!--            android:title="@string/winrewards" />-->
+
+<!--        <item-->
+<!--            android:id="@+id/menu_moh"-->
+<!--            android:icon="@drawable/moh"-->
+<!--            android:title="@string/manofhonour" />-->
+
+<!--        <item-->
+<!--            android:id="@+id/menu_mon"-->
+<!--            android:icon="@drawable/mon"-->
+<!--            android:title="@string/manofnature" />-->
+
+<!--    </group>-->
+
     <group
         android:id="@+id/group4"
         android:checkableBehavior="none">
 
         <item
-            android:id="@+id/menu_giveaway"
-            android:icon="@drawable/giveaway"
-            android:title="@string/winrewards" />
+            android:id="@+id/menu_offer"
+            android:icon="@drawable/offer"
+            android:title="Offer" />
 
         <item
-            android:id="@+id/menu_moh"
-            android:icon="@drawable/moh"
-            android:title="@string/manofhonour" />
-
-        <item
-            android:id="@+id/menu_mon"
-            android:icon="@drawable/mon"
-            android:title="@string/manofnature" />
+            android:id="@+id/menu_internship"
+            android:icon="@drawable/internship"
+            android:title="Internship" />
 
     </group>
+
 
 
 
