@@ -20,10 +20,12 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.asquare.booksbear.R;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.paytm.pgsdk.Log;
 
 import java.util.List;
 
@@ -65,9 +67,33 @@ public class LoadUrlActivity extends AppCompatActivity implements AdvancedWebVie
         mWebView.setWebViewClient(new WebViewClient() {
             @Override
             public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+
                 view.loadUrl(request.getUrl().toString());
                 return false;
             }
+        });
+        mWebView.setWebViewClient(new WebViewClient() {
+
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+
+                try {
+                    if (url.contains("play.google.com")){
+                        Uri uri = Uri.parse(url); // missing 'http://' will cause crashed
+                        Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                        startActivity(intent);
+
+
+                    }
+
+                    // do whatever you want to do on a web link click
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                return false;
+            }
+
         });
     }
     @Override
@@ -115,6 +141,7 @@ public class LoadUrlActivity extends AppCompatActivity implements AdvancedWebVie
 
     @Override
     public void onExternalPageRequest(String url) {
+
 
 
     }

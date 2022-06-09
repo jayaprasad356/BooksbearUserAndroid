@@ -199,10 +199,14 @@ public class DrawerFragment extends Fragment {
 
         });
         tvChat.setOnClickListener(v ->{
-            String url = Constant.CHATWEBURL;
-            Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(url));
-            startActivity(i);
+            Intent intent = new Intent(requireActivity(), LoadUrlActivity.class);
+            intent.putExtra("url",Constant.CHATWEBURL);
+            intent.putExtra("title","LIVE CHAT");
+            startActivity(intent);
+//            String url = Constant.CHATWEBURL;
+//            Intent i = new Intent(Intent.ACTION_VIEW);
+//            i.setData(Uri.parse(url));
+//            startActivity(i);
 
         });
         tvSell.setOnClickListener(v ->{

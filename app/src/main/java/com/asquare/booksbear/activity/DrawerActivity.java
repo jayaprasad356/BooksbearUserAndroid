@@ -239,10 +239,14 @@ public class DrawerActivity extends AppCompatActivity {
                     bundle.putString("type", "Chat");
                     fragment.setArguments(bundle);
                     getSupportFragmentManager().beginTransaction().add(R.id.container, fragment).addToBackStack(null).commit();*/
-                    String url = Constant.CHATWEBURL;
-                    Intent i = new Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse(url));
-                    startActivity(i);
+//                    String url = Constant.CHATWEBURL;
+//                    Intent i = new Intent(Intent.ACTION_VIEW);
+//                    i.setData(Uri.parse(url));
+//                    startActivity(i);
+                    intent = new Intent(getApplicationContext(),LoadUrlActivity.class);
+                    intent.putExtra("url",Constant.CHATWEBURL);
+                    intent.putExtra("title","Live Chat");
+                    startActivity(intent);
                     break;
                 case R.id.menu_about_us:
                     fragment = new WebViewFragment();
