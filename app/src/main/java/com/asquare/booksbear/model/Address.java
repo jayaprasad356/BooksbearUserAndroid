@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Address implements Serializable {
 
-    String id, user_id, type, name, mobile, alternate_mobile, address, landmark, area_id, pincode_id, city_id, state, country, latitude, longitude, is_default, date_created, user_name, area_name, pincode, city, minimum_free_delivery_order_amount, delivery_charges;
+    String id, user_id, type, name, mobile, alternate_mobile, address, landmark, area_id, pincode_id, city_id, state, country, latitude, longitude, is_default, date_created, user_name, area_name, pincode, city, minimum_free_delivery_order_amount, delivery_charges,area;
     boolean isSelected;
 
     public String getId() {
@@ -189,6 +189,14 @@ public class Address implements Serializable {
 
     public void setDelivery_charges(String delivery_charges) {
         this.delivery_charges = delivery_charges;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 
     public boolean isSelected() {

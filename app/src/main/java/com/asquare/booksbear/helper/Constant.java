@@ -6,8 +6,8 @@ public class Constant {
     //MODIFICATION PART
 
     //public static final String MAINBASEUrl = "http://bbdebug.booksbear.in/"; //Admin panel url
-    //public static final String MAINBASEUrl = "http://192.168.43.122/booksbearadmin/"; //Admin panel url
-    public static final String MAINBASEUrl = "https://admin.booksbear.in/"; //Admin panel url
+    public static final String MAINBASEUrl = "http://192.168.43.38/booksbear/"; //Admin panel url
+    //public static final String MAINBASEUrl = "https://admin.booksbear.in/"; //Admin panel url
 
     //set your jwt secret key here...key must same in PHP and Android
     public static final String JWT_KEY = "12345678";
@@ -169,6 +169,7 @@ public class Constant {
     public static final String CITY_ID = "city_id";
     public static final String PINCODE_ID = "pincode_id";
     public static final String PINCODE = "pincode";
+    public static final String AREA = "area";
     public static final String CITY = "city";
     public static final String AREA_ID = "area_id";
     public static final String REFERRAL_CODE = "referral_code";
@@ -362,6 +363,7 @@ public class Constant {
 
     //**************Constants Values***************
     public static String selectedAddressId = "";
+    public static String selectedPincode = "";
     public static String DefaultAddress = "";
     public static String DefaultCity = "";
     public static String DefaultPinCode = "";

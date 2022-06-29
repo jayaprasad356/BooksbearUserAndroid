@@ -57,7 +57,7 @@ public class AddressAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NotNull RecyclerView.ViewHolder holderparent, final int position) {
+    public void onBindViewHolder(@NotNull RecyclerView.ViewHolder holderparent, @SuppressLint("RecyclerView") final int position) {
         final AddressItemHolder holder = (AddressItemHolder) holderparent;
         final Address address = addresses.get(position);
         id = address.getId();
@@ -149,6 +149,7 @@ public class AddressAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             @Override
             public void onClick(View v) {
                 Constant.selectedAddressId = address.getId();
+                Constant.selectedPincode = address.getPincode();
                 new Session(activity).setData(Constant.LONGITUDE, address.getLongitude());
                 new Session(activity).setData(Constant.LATITUDE, address.getLatitude());
 

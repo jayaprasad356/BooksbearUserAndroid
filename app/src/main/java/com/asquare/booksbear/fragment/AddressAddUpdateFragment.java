@@ -3,6 +3,7 @@ package com.asquare.booksbear.fragment;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -90,12 +91,13 @@ public class AddressAddUpdateFragment extends Fragment implements OnMapReadyCall
     TextView tvUpdate, edtName, edtMobile, edtAlternateMobile, edtAddress, edtLanmark, edtState, edtCounty;
     public static TextView edtPinCode;
     ScrollView scrollView;
-    String name, mobile, alternateMobile, address2, landmark, pincode, state, country, isdefault, addressType;
+    String name, mobile, alternateMobile, address2, landmark, pincode, state, country, isdefault, addressType,city,area;
     int position;
     Activity activity;
     int offset = 0;
     String For;
     Button checkbtn;
+    boolean PincodeCheck = false;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -150,6 +152,7 @@ public class AddressAddUpdateFragment extends Fragment implements OnMapReadyCall
             @Override
             public void onClick(View view) {
                 if (!edtPinCode.getText().toString().trim().equals("") && edtPinCode.getText().length() == 6){
+
                     Updatepostaldata();
                 }
 
@@ -169,6 +172,7 @@ public class AddressAddUpdateFragment extends Fragment implements OnMapReadyCall
             tvCurrent.setText(getString(R.string.location_1) + ApiConfig.getAddress(latitude, longitude, getActivity()));
             mapFragment.getMapAsync(this);
             SetData();
+            Updatepostaldata();
         } else {
             progressBar.setVisibility(View.VISIBLE);
             scrollView.setVisibility(View.VISIBLE);
@@ -199,7 +203,13 @@ public class AddressAddUpdateFragment extends Fragment implements OnMapReadyCall
         btnsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AddUpdateAddress();
+                if (PincodeCheck){
+                    AddUpdateAddress();
+
+                }else {
+                    Toast.makeText(activity, "Provide Area,City,State", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -236,6 +246,10 @@ public class AddressAddUpdateFragment extends Fragment implements OnMapReadyCall
     }
 
     private void Updatepostaldata() {
+        ProgressDialog progressDialog = new ProgressDialog(activity);
+        progressDialog.setTitle("Loading");
+        progressDialog.setCancelable(false);
+        progressDialog.show();
         Retrofit retrofit=new Retrofit.Builder()
                 .baseUrl("http://postalpincode.in/api/pincode/")
                 .addConverterFactory(GsonConverterFactory.create())
@@ -249,6 +263,8 @@ public class AddressAddUpdateFragment extends Fragment implements OnMapReadyCall
             @Override
             public void onResponse(Call<ResponseData> call, Response<ResponseData> response) {
                 if (response.isSuccessful() && !response.body().getStatus().equals("Error")){
+                    PincodeCheck = true;
+                    progressDialog.dismiss();
                     newareaaaray.clear();
                     newcityaaray.clear();
                     for (int i = 0; i < response.body().getPostOffice().size(); i++){
@@ -271,6 +287,10 @@ public class AddressAddUpdateFragment extends Fragment implements OnMapReadyCall
                     ArrayAdapter<String> cityArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, newcityaaray);
                     cityArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item); // The drop down view
                     citySpinner.setAdapter(cityArrayAdapter);
+                    int cityPosition = cityArrayAdapter.getPosition(city);
+                    citySpinner.setSelection(cityPosition);
+                    int areaPosition = areaArrayAdapter.getPosition(area);
+                    areaSpinner.setSelection(areaPosition);
                     edtState.setText(response.body().getPostOffice().get(0).getState());
                     edtCounty.setText(response.body().getPostOffice().get(0).getCountry());
 
@@ -278,6 +298,7 @@ public class AddressAddUpdateFragment extends Fragment implements OnMapReadyCall
 
                 }
                 else {
+                    progressDialog.dismiss();
                     Toast.makeText(getActivity(), "invalid pincode", Toast.LENGTH_SHORT).show();
                 }
 
@@ -305,6 +326,8 @@ public class AddressAddUpdateFragment extends Fragment implements OnMapReadyCall
         country = address1.getCountry();
         isdefault = address1.getIs_default();
         addressType = address1.getType();
+        city = address1.getCity();
+        area = address1.getArea();
 
         progressBar.setVisibility(View.VISIBLE);
         edtName.setText(name);
@@ -314,6 +337,7 @@ public class AddressAddUpdateFragment extends Fragment implements OnMapReadyCall
         edtLanmark.setText(landmark);
         edtState.setText(state);
         edtCounty.setText(country);
+        edtPinCode.setText(address1.getPincode());
         chIsDefault.setChecked(isdefault.equalsIgnoreCase("1"));
 
         if (addressType.equalsIgnoreCase("home")) {
@@ -334,6 +358,7 @@ public class AddressAddUpdateFragment extends Fragment implements OnMapReadyCall
     }
 
     void AddUpdateAddress() {
+
 
         String isDefault = chIsDefault.isChecked() ? "1" : "0";
         String type = rdHome.isChecked() ? "Home" : rdOffice.isChecked() ? "Office" : "Other";
@@ -370,11 +395,14 @@ public class AddressAddUpdateFragment extends Fragment implements OnMapReadyCall
             params.put(Constant.TYPE, type);
             params.put(Constant.NAME, edtName.getText().toString().trim());
             params.put(Constant.MOBILE, edtMobile.getText().toString().trim());
-            params.put(Constant.ADDRESS, edtAddress.getText().toString().trim() + " "+edtPinCode.getText().toString().trim());
+            params.put(Constant.ADDRESS, edtAddress.getText().toString().trim());
             params.put(Constant.LANDMARK, edtLanmark.getText().toString().trim());
             params.put(Constant.AREA_ID, "1");
             params.put(Constant.CITY_ID, "1");
             params.put(Constant.PINCODE_ID, "1");
+            params.put(Constant.PINCODE, edtPinCode.getText().toString().trim());
+            params.put(Constant.AREA, areaSpinner.getSelectedItem().toString().trim());
+            params.put(Constant.CITY, citySpinner.getSelectedItem().toString().trim());
             params.put(Constant.STATE, edtState.getText().toString().trim());
             params.put(Constant.COUNTRY, edtCounty.getText().toString().trim());
             params.put(Constant.ALTERNATE_MOBILE, edtAlternateMobile.getText().toString().trim());
@@ -388,6 +416,7 @@ public class AddressAddUpdateFragment extends Fragment implements OnMapReadyCall
             ApiConfig.RequestToVolley(new VolleyCallback() {
                 @Override
                 public void onSuccess(boolean result, String response) {
+                    Log.d("ADDRES",response);
                     if (result) {
 
                         try {

@@ -3,6 +3,7 @@ package com.asquare.booksbear.fragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
@@ -107,14 +108,21 @@ public class AddressListFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
                     if (!Constant.selectedAddressId.isEmpty()) {
-                        MainActivity.fm.beginTransaction().add(R.id.container, new CheckoutFragment()).addToBackStack(null).commit();
-                        try {
-                            if (CheckoutFragment.pCodeDiscount != 0) {
-                                CheckoutFragment.pCodeDiscount = 0;
+                        if (Constant.selectedPincode.length() == 6){
+                            MainActivity.fm.beginTransaction().add(R.id.container, new CheckoutFragment()).addToBackStack(null).commit();
+                            try {
+                                if (CheckoutFragment.pCodeDiscount != 0) {
+                                    CheckoutFragment.pCodeDiscount = 0;
+                                }
+                            } catch (Exception ignore) {
+
                             }
-                        } catch (Exception ignore) {
+
+                        }else {
+                            Toast.makeText(activity, "Selected Address has Invalid Pincode, Please Change", Toast.LENGTH_SHORT).show();
 
                         }
+
                     } else {
                         Toast.makeText(activity, R.string.select_delivery_address, Toast.LENGTH_SHORT).show();
                     }
@@ -199,6 +207,7 @@ public class AddressListFragment extends Fragment {
         ApiConfig.RequestToVolley(new VolleyCallback() {
             @Override
             public void onSuccess(boolean result, String response) {
+                Log.d("GET_ADD",response);
                 if (result) {
                     try {
                         Constant.selectedAddressId = "";
